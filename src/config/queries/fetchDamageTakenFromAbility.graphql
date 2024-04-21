@@ -1,0 +1,12 @@
+query FetchDamageTakenFromAbility($reportCode: String!, $abilityId: Int!, $dataType: String!, $killType: String!, $fightIDs: [Int!]!) {
+  reportData {
+    report(code: $reportCode) {
+      table(
+        abilityId: $abilityId,
+        dataType: $dataType,
+        killType: $killType,
+        fightIDs: $fightIDs
+      )
+    }
+  }
+}

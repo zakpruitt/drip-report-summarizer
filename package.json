@@ -4,7 +4,7 @@
   "description": "The drip Report Summarizer (name WIP) seamlessly parses WarcraftLog reports via the WCL API to automate feedback.",
   "main": "dist/main.js",
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && copyfiles -u 2 src/config/queries/*.graphql dist/config/",
     "start": "node dist/main.js",
     "dev": "nodemon --exec npx ts-node src/main.ts' --exec 'ts-node' src/main.ts",
     "build-start": "npm run build && npm run start"
@@ -20,10 +20,13 @@
   },
   "homepage": "https://github.com/zakpruitt/drip-report-summarizer#readme",
   "devDependencies": {
+    "copyfiles": "^2.4.1",
     "@types/node": "^20.12.7",
     "typescript": "^5.4.5"
   },
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "axios": "^1.6.8",
+    "dotenv": "^16.4.5",
+    "graphql-tag": "^2.12.6"
   }
 }
