@@ -1,11 +1,11 @@
 import axios, {AxiosInstance} from 'axios';
 import OpenAuthClient from "./openAuthClient";
-import {wclGraphqlUrl} from "../config/env";
+import {environmentLevel, wclGraphqlUrl} from "../config/env";
 import path from "node:path";
 import {readFileSync} from "node:fs";
 import gql from "graphql-tag";
 
-class WarcraftLogsClient {
+export default class WarcraftLogsClient {
     private client: AxiosInstance;
     private openAuthClient: OpenAuthClient;
 
@@ -28,28 +28,27 @@ class WarcraftLogsClient {
 
     private loadQuery(file: string): any {
         let filePath = path.join(__dirname, 'config/queries', file);
-        if (process.env.NODE_ENV !== 'production') {
+        if (environmentLevel !== 'production') {
             filePath = path.join(__dirname, '../../src/config/queries', file);
         }
         const query = readFileSync(filePath, 'utf8');
         return gql`${query}`;
     }
 
-
-    public async fetchDamageTakenReport(reportCode: string, sourceID: number, fightIDs: number[]): Promise<any> {
-        const query = this.loadQuery('fetchDamageTakenFromAbility.graphql');
-        const variables = { reportCode, sourceID, fightIDs, dataType: 'DamageTaken', killType: 'Wipes' };
-        return await this.query(query.loc.source.body, variables);  // `query.loc.source.body` gets the string value if using graphql-tag
-    }
-
     private async query(query: string, variables: any): Promise<any> {
         try {
             const response = await this.client.post('', { query, variables });
-            return response.data.data;
+            return response.data;
         } catch (error) {
             console.error('Error making API call', error);
             throw new Error('API call failed');
         }
+    }
+
+    public async fetchDamageTakenReport(reportCode: string, abilityID: number, dataType: String, fightIDs: number[]): Promise<any> {
+        const query = this.loadQuery('fetchDamageTakenFromAbility.graphql');
+        const variables = { reportCode, abilityID, fightIDs, dataType, killType: 'Wipes' };
+        return await this.query(query.loc.source.body, variables);
     }
 
 }
