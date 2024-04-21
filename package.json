@@ -1,0 +1,29 @@
+{
+  "name": "drip-report-summarizer",
+  "version": "1.0.0",
+  "description": "The drip Report Summarizer (name WIP) seamlessly parses WarcraftLog reports via the WCL API to automate feedback.",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "nodemon --exec npx ts-node src/main.ts' --exec 'ts-node' src/main.ts",
+    "build-start": "npm run build && npm run start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zakpruitt/drip-report-summarizer.git"
+  },
+  "author": "Zak Pruitt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zakpruitt/drip-report-summarizer/issues"
+  },
+  "homepage": "https://github.com/zakpruitt/drip-report-summarizer#readme",
+  "devDependencies": {
+    "@types/node": "^20.12.7",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}
