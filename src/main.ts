@@ -1,5 +1,5 @@
-import WarcraftLogsClient from "./api/warcraftLogsClient";
-import OpenAuthClient from "./api/openAuthClient";
+import WarcraftLogsClient from "./apis/warcraftLogsClient";
+import OpenAuthClient from "./apis/openAuthClient";
 
 const oauthClient: OpenAuthClient = new OpenAuthClient();
 const api: WarcraftLogsClient = new WarcraftLogsClient(oauthClient);

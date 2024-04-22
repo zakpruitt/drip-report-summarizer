@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {wclAuthUrl, wclClientId, wclClientSecret} from "../config/env";
+import {wclAuthUrl, wclClientId, wclClientSecret} from "../configs/env";
 import OAuthResponse from "./openAuthResponse.interface";
 
 export default class OpenAuthClient {

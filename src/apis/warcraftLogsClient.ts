@@ -1,6 +1,6 @@
 import axios, {AxiosInstance} from 'axios';
 import OpenAuthClient from "./openAuthClient";
-import {environmentLevel, wclGraphqlUrl} from "../config/env";
+import {environmentLevel, wclGraphqlUrl} from "../configs/env";
 import path from "node:path";
 import {readFileSync} from "node:fs";
 import gql from "graphql-tag";
@@ -27,9 +27,9 @@ export default class WarcraftLogsClient {
     }
 
     private loadQuery(file: string): any {
-        let filePath = path.join(__dirname, 'config/queries', file);
+        let filePath = path.join(__dirname, 'configs/queries', file);
         if (environmentLevel !== 'production') {
-            filePath = path.join(__dirname, '../../src/config/queries', file);
+            filePath = path.join(__dirname, '../../src/configs/queries', file);
         }
         const query = readFileSync(filePath, 'utf8');
         return gql`${query}`;
