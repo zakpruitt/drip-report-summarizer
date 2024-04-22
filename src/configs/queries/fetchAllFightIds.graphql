@@ -1,0 +1,9 @@
+query FetchAllFightIds($reportCode: String!, $killType: KillType!) {
+  reportData {
+    report(code: $reportCode) {
+        fights(killType: $killType) {
+            id
+        }
+    }
+  }
+}
