@@ -35,20 +35,26 @@ export default class WarcraftLogsClient {
         return gql`${query}`;
     }
 
+    public async fetchAllFightIds(reportCode: string): Promise<any> {
+        const query = this.loadQuery('fetchAllFightIds.graphql');
+        const variables = {reportCode, killType: 'All'};
+        return await this.query(query.loc.source.body, variables);
+    }
+
+    public async fetchDamageTakenReport(reportCode: string, abilityID: number, dataType: String, fightIDs: number[]): Promise<any> {
+        const query = this.loadQuery('fetchDamageTakenFromAbility.graphql');
+        const variables = {reportCode, abilityID, fightIDs, dataType, killType: 'All'};
+        return await this.query(query.loc.source.body, variables);
+    }
+
     private async query(query: string, variables: any): Promise<any> {
         try {
-            const response = await this.client.post('', { query, variables });
+            const response = await this.client.post('', {query, variables});
             return response.data;
         } catch (error) {
             console.error('Error making API call', error);
             throw new Error('API call failed');
         }
-    }
-
-    public async fetchDamageTakenReport(reportCode: string, abilityID: number, dataType: String, fightIDs: number[]): Promise<any> {
-        const query = this.loadQuery('fetchDamageTakenFromAbility.graphql');
-        const variables = { reportCode, abilityID, fightIDs, dataType, killType: 'Wipes' };
-        return await this.query(query.loc.source.body, variables);
     }
 
 }

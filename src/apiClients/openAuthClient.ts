@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { wclAuthUrl, wclClientId, wclClientSecret } from "../configs/env";
+import {wclAuthUrl, wclClientId, wclClientSecret} from "../configs/env";
 
 export default class OpenAuthClient {
     private static token: string | null = null;
