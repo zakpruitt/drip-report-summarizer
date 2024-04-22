@@ -1,15 +1,13 @@
 import WarcraftLogsClient from "./apis/warcraftLogsClient";
 import OpenAuthClient from "./apis/openAuthClient";
+import FyrakkRunner from "./bossRunners/amirdrassilRunners/fyrakkRunner";
 
 const oauthClient: OpenAuthClient = new OpenAuthClient();
-const api: WarcraftLogsClient = new WarcraftLogsClient(oauthClient);
+const apiClient: WarcraftLogsClient = new WarcraftLogsClient(oauthClient);
 
-api.fetchDamageTakenReport("dRH2639fMqQDGzCv", 417789, "DamageTaken", [8])
+const fyrakkRunner: FyrakkRunner = new FyrakkRunner();
+
+fyrakkRunner.fetchDamageTaken("dRH2639fMqQDGzCv", [8], apiClient)
     .then(data => {
-        console.log(data);
-    })
-    .catch(error => {
-        console.error("Failed to fetch the report:", error);
+        console.log(data)
     });
-
-
