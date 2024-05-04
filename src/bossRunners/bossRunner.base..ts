@@ -21,7 +21,6 @@ export default abstract class Boss {
             const parsedData = this.damageTakenParser.parse(data);
             results[this.bossName][ability.name] = {
                 abilityId: ability.id,
-                abilityName: ability.name,
                 data: parsedData
             };
         }
