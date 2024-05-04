@@ -35,9 +35,9 @@ export default class WarcraftLogsClient {
         return gql`${query}`;
     }
 
-    public async fetchAllFightIds(reportCode: string): Promise<any> {
+    public async fetchAllFightIds(reportCode: string, difficulty: number): Promise<any> {
         const query = this.loadQuery('fetchAllFightIds.graphql');
-        const variables = {reportCode, killType: 'All'};
+        const variables = {reportCode, killType: 'All', difficulty};
         return await this.query(query.loc.source.body, variables);
     }
 

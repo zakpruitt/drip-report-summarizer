@@ -1,9 +1,9 @@
-query FetchAllFightIds($reportCode: String!, $killType: KillType!) {
-  reportData {
-    report(code: $reportCode) {
-        fights(killType: $killType) {
-            id
+query FetchAllFightIds($reportCode: String!, $killType: KillType!, $difficulty: Int!) {
+    reportData {
+        report(code: $reportCode) {
+            fights(difficulty: $difficulty, killType: $killType) {
+                id
+            }
         }
     }
-  }
 }
